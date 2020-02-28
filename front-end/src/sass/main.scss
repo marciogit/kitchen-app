@@ -1,0 +1,187 @@
+@import '_fonts.scss';
+@import "_mixins.scss";
+
+* {
+	margin: 0;
+	padding: 0;
+	cursor: default;
+}
+
+.App {
+	@include size(370px, 100vh);
+	position: relative;
+	user-select: none;
+	overflow: hidden;
+
+	.top_bar {
+		@include size(100%, 38px, grid);
+		@include bmd-bold(14px, center, #f3f3f3);
+		align-items: center;
+		text-transform: uppercase;
+		letter-spacing: .2em;
+		background-color: #303030;
+	}
+
+	.nav {
+		@include size(auto, 50px);
+		@include grid(repeat(5, 20%), auto);
+		align-items: center;
+		justify-items: center;
+		list-style: none;
+		background-color: #F2F2F2;
+		border-bottom: 1px solid #EBEBEB;
+	
+		li {
+			@include size(66px, 42px);
+			@include grid(100%, auto);
+			@include bmd-bold(13px, center, #333);
+			align-items: center;
+			justify-items: center;
+			border-radius: 5px;
+	
+			&.active {
+				color: #EE586E;
+				box-shadow: inset 0px 0px 0px 1px rgba(238,88,110,1);
+			}
+	
+			&.current_day {
+				background-color: #EE586E;
+				color: #fff;
+			}
+
+			&.past_day {
+				@include bg('../img/scribble.png', no-repeat, center, 54px 31px);
+				pointer-events: none;
+				color: transparentize($color: #000000, $amount: .5);
+			}
+		}
+	}
+	
+
+	.day {
+		@include grid(100%, repeat(3, 115px));
+		display: none;
+		transition: .2s;
+
+		&.active 	{ display: grid; }
+		&.holiday 	{ @include grid(100%, 339px); }
+
+		// Dessert Layout
+		&.dessert	{
+			grid-template-rows: repeat(4, calc(339px / 4));
+
+			div {
+				padding: 10px 100px 10px 20px;
+
+				h4 {
+					margin: 0 0 5px 0;
+				}
+
+				&.meat_lovers, &.vegetarian, &.salad {
+					background-position: 95% 5px;
+				}
+			}
+		}
+
+		div {
+			padding: 20px 100px 20px 20px;
+			border-bottom: 1px solid #ebebeb;
+
+			&.meat_lovers {
+				@include bg('../img/icon_meat_lovers.png', no-repeat, 95% 15px, 80px 80px);
+			}
+
+			&.vegetarian {
+				@include bg('../img/icon_vegetarian.png', no-repeat, 95% 15px, 80px 80px);
+			}
+
+			&.salad {
+				@include bg('../img/icon_salad.png', no-repeat, 95% 15px, 80px 80px);
+			}
+
+			&.holiday {
+				@include size(100%, 340px, none);
+				@include bg('../img/beach.png', no-repeat, 100px 110px, 256px 256px);
+				position: relative;
+				padding: 0;
+
+				&.show { display: block; }
+
+				h4 {
+					@include size(100%, auto);
+					@include position(50px, null, null, 0);
+					@include bmd-bold(18px, center,#303030);
+					border: none;
+				}
+			}
+
+			&.dessert {
+				@include bg('../img/icon_dessert.png', no-repeat, 95% 0, 80px 80px);
+				display: none;
+
+				&.show {
+					display: block;
+				}
+			}
+
+			h4 {
+				@include size(auto, auto, inline-block);
+				@include bmd-bold(13px, left,#EE586E);
+				padding: 5px;
+				margin: 0 0 10px 0;
+				border-bottom: 1px solid #EE586E;
+			}
+
+			p {
+				@include bmd-regular(12px, left, #656565);
+				line-height: 1.5em;
+			}
+
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+	}
+}
+
+.loader {
+	@include size(auto);
+	@include position(calc(50% - 35px), null, null, calc(50% - 50px));
+
+	.block01, .block02, .block03 {
+		@include size(25px, 25px, block);
+		float: left;
+		border: 2px solid orange;
+		border-radius: 5px;
+		opacity: 0;
+	}
+
+	.block01 { animation: loadAnimation 1s infinite ease-in-out; animation-delay: 0s; }
+	.block02 { animation: loadAnimation02 1s infinite ease-in-out; animation-delay: .2s; margin: 0 5px; }
+	.block03 { animation: loadAnimation03 1s infinite ease-in-out; animation-delay: .4s; }
+}
+
+.loader--hide {
+	opacity: 0;
+	pointer-events: none;
+}
+  
+@keyframes loadAnimation {
+	0% 		{ transform: scale(0, 0); opacity: 0; }
+	50% 	{ transform: rotate(180deg); opacity: 1; }
+	100% 	{ transform: rotate(360deg); opacity: 0; }
+}
+
+@keyframes loadAnimation02 {
+	0% 		{ transform: scale(0, 0); opacity: 0; }
+	50% 	{ transform: rotate(180deg); opacity: 1; }
+	100% 	{ transform: rotate(360deg); opacity: 0; }
+}
+
+@keyframes loadAnimation03 {
+	0% 		{ transform: scale(0, 0); opacity: 0; }
+	50% 	{ transform: rotate(180deg); opacity: 1; }
+	100% 	{ transform: rotate(360deg); opacity: 0; }
+}
+
+.none { display: none; }

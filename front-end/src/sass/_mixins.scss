@@ -1,0 +1,42 @@
+
+@mixin position($top: null, $right: null, $bottom: null, $left: null) {
+	position: absolute;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+}
+
+@mixin size($width, $height: $width, $display: null){
+	display: $display;
+	width: $width;
+	height: $height;
+}
+
+
+@mixin grid($columns, $rows, $gap: null) {
+	display: grid;
+	grid-template-columns: $columns;
+	grid-template-rows: $rows;
+	gap: $gap;
+}
+
+@mixin text($size:null, $align: null, $color: null) {
+	font-size: $size;
+	text-align: $align;
+	color: $color;
+}
+
+@mixin radius-corners($top-left: null, $top-right: null, $bottom-left: null, $bottom-right: null) {
+	border-top-left-radius: $top-left;
+	border-top-right-radius: $top-right;
+	border-bottom-left-radius: $bottom-left;
+	border-bottom-right-radius: $bottom-right;
+}
+
+@mixin bg($url:null, $repeat:null, $position:null, $size:null) {
+	background-image: url($url);
+	background-repeat: $repeat;
+	background-position: $position;
+	background-size: $size;
+}

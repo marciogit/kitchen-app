@@ -1,0 +1,44 @@
+
+//⦿⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦿
+// TYPOGRAPHY
+//⦿⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦂⦿
+
+/* --- BMD Light --- */
+@mixin bmd-light ($size, $align:null, $color:null) {
+	font-family: 'BMD light';
+	font-size: $size;
+	text-align: $align;
+	color: $color;
+}
+
+/* --- BMD Medium --- */
+@mixin bmd-medium ($size, $align:null, $color:null) {
+	font-family: 'BMD medium';
+	font-size: $size;
+	text-align: $align;
+	color: $color;
+}
+
+/* --- BMD Regular --- */
+@mixin bmd-regular ($size, $align:null, $color:null) {
+	font-family: 'BMD regular';
+	font-size: $size;
+	text-align: $align;
+	color: $color;
+}
+
+/* --- BMD Bold --- */
+@mixin bmd-bold ($size, $align:null, $color:null) {
+	font-family: 'BMD bold';
+	font-size: $size;
+	text-align: $align;
+	color: $color;
+}
+
+/* --- BMD Heavy --- */
+@mixin bmd-heavy ($size, $align:null, $color:null) {
+	font-family: 'BMD heavy';
+	font-size: $size;
+	text-align: $align;
+	color: $color;
+}

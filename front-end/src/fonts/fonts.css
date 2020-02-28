@@ -1,0 +1,25 @@
+
+@font-face {
+	font-family: 'BMD light';
+	src: url('BMD-Light.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'BMD medium';
+	src: url('BMD-Medium.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'BMD regular';
+	src: url('BMD-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'BMD bold';
+	src: url('BMD-Bold.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'BMD heavy';
+	src: url('BMD-Heavy.ttf') format('truetype');
+}

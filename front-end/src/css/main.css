@@ -1,0 +1,218 @@
+/* --- BMD Light --- */
+/* --- BMD Medium --- */
+/* --- BMD Regular --- */
+/* --- BMD Bold --- */
+/* --- BMD Heavy --- */
+* {
+  margin: 0;
+  padding: 0;
+  cursor: default; }
+
+.App {
+  width: 370px;
+  height: 100vh;
+  position: relative;
+  user-select: none;
+  overflow: hidden; }
+  .App .top_bar {
+    display: grid;
+    width: 100%;
+    height: 38px;
+    font-family: 'BMD bold';
+    font-size: 14px;
+    text-align: center;
+    color: #f3f3f3;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    background-color: #303030; }
+  .App .nav {
+    width: auto;
+    height: 50px;
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: auto;
+    align-items: center;
+    justify-items: center;
+    list-style: none;
+    background-color: #F2F2F2;
+    border-bottom: 1px solid #EBEBEB; }
+    .App .nav li {
+      width: 66px;
+      height: 42px;
+      display: grid;
+      grid-template-columns: 100%;
+      grid-template-rows: auto;
+      font-family: 'BMD bold';
+      font-size: 13px;
+      text-align: center;
+      color: #333;
+      align-items: center;
+      justify-items: center;
+      border-radius: 5px; }
+      .App .nav li.active {
+        color: #EE586E;
+        box-shadow: inset 0px 0px 0px 1px #ee586e; }
+      .App .nav li.current_day {
+        background-color: #EE586E;
+        color: #fff; }
+      .App .nav li.past_day {
+        background-image: url("../img/scribble.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 54px 31px;
+        pointer-events: none;
+        color: rgba(0, 0, 0, 0.5); }
+  .App .day {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(3, 115px);
+    display: none;
+    transition: .2s; }
+    .App .day.active {
+      display: grid; }
+    .App .day.holiday {
+      display: grid;
+      grid-template-columns: 100%;
+      grid-template-rows: 339px; }
+    .App .day.dessert {
+      grid-template-rows: repeat(4, calc(339px / 4)); }
+      .App .day.dessert div {
+        padding: 10px 100px 10px 20px; }
+        .App .day.dessert div h4 {
+          margin: 0 0 5px 0; }
+        .App .day.dessert div.meat_lovers, .App .day.dessert div.vegetarian, .App .day.dessert div.salad {
+          background-position: 95% 5px; }
+    .App .day div {
+      padding: 20px 100px 20px 20px;
+      border-bottom: 1px solid #ebebeb; }
+      .App .day div.meat_lovers {
+        background-image: url("../img/icon_meat_lovers.png");
+        background-repeat: no-repeat;
+        background-position: 95% 15px;
+        background-size: 80px 80px; }
+      .App .day div.vegetarian {
+        background-image: url("../img/icon_vegetarian.png");
+        background-repeat: no-repeat;
+        background-position: 95% 15px;
+        background-size: 80px 80px; }
+      .App .day div.salad {
+        background-image: url("../img/icon_salad.png");
+        background-repeat: no-repeat;
+        background-position: 95% 15px;
+        background-size: 80px 80px; }
+      .App .day div.holiday {
+        display: none;
+        width: 100%;
+        height: 340px;
+        background-image: url("../img/beach.png");
+        background-repeat: no-repeat;
+        background-position: 100px 110px;
+        background-size: 256px 256px;
+        position: relative;
+        padding: 0; }
+        .App .day div.holiday.show {
+          display: block; }
+        .App .day div.holiday h4 {
+          width: 100%;
+          height: auto;
+          position: absolute;
+          top: 50px;
+          left: 0;
+          font-family: 'BMD bold';
+          font-size: 18px;
+          text-align: center;
+          color: #303030;
+          border: none; }
+      .App .day div.dessert {
+        background-image: url("../img/icon_dessert.png");
+        background-repeat: no-repeat;
+        background-position: 95% 0;
+        background-size: 80px 80px;
+        display: none; }
+        .App .day div.dessert.show {
+          display: block; }
+      .App .day div h4 {
+        display: inline-block;
+        width: auto;
+        height: auto;
+        font-family: 'BMD bold';
+        font-size: 13px;
+        text-align: left;
+        color: #EE586E;
+        padding: 5px;
+        margin: 0 0 10px 0;
+        border-bottom: 1px solid #EE586E; }
+      .App .day div p {
+        font-family: 'BMD regular';
+        font-size: 12px;
+        text-align: left;
+        color: #656565;
+        line-height: 1.5em; }
+      .App .day div:last-child {
+        border-bottom: none; }
+
+.loader {
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: calc(50% - 35px);
+  left: calc(50% - 50px); }
+  .loader .block01, .loader .block02, .loader .block03 {
+    display: block;
+    width: 25px;
+    height: 25px;
+    float: left;
+    border: 2px solid orange;
+    border-radius: 5px;
+    opacity: 0; }
+  .loader .block01 {
+    animation: loadAnimation 1s infinite ease-in-out;
+    animation-delay: 0s; }
+  .loader .block02 {
+    animation: loadAnimation02 1s infinite ease-in-out;
+    animation-delay: .2s;
+    margin: 0 5px; }
+  .loader .block03 {
+    animation: loadAnimation03 1s infinite ease-in-out;
+    animation-delay: .4s; }
+
+.loader--hide {
+  opacity: 0;
+  pointer-events: none; }
+
+@keyframes loadAnimation {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0; }
+  50% {
+    transform: rotate(180deg);
+    opacity: 1; }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0; } }
+
+@keyframes loadAnimation02 {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0; }
+  50% {
+    transform: rotate(180deg);
+    opacity: 1; }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0; } }
+
+@keyframes loadAnimation03 {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0; }
+  50% {
+    transform: rotate(180deg);
+    opacity: 1; }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0; } }
+
+.none {
+  display: none; }
