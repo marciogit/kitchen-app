@@ -1,13 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Welcome from './components/Welcome';
+import React from 'react';
 import Meals from './components/Meals';
 
-function App({props, hideLoader}) {
-
-	useEffect(() => {
-		hideLoader();
-	},[]);
-
+function App({props}) {
 	return (
 		<>
 			<Meals></Meals>

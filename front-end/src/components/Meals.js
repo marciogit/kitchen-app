@@ -1,30 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
-import api from '../services/api';
+import { DB_CONFIG } from '../config/db';
+import * as firebase from 'firebase';
+firebase.initializeApp(DB_CONFIG);
 
 function Meals(props) {
 
 	// Date and Time
 	const day = new Date().getDay();
-	const hour = new Date().getHours();
-	const minutes = new Date().getMinutes();
-
 	const listDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 	
 	// Hooks
+	const [ loading, setLoading ] = useState(false);
 	const [ days, setDays ] = useState([]);
 	const [ weekDay, setWeekDay ] = useState('');
 	const [ activeIndex, setActive ] = useState(day-1);
 
-	// function doNotify() {
-	// 	Notification.requestPermission().then(function (result) {
-	// 		const myNotification = new Notification("Dessert Day!!!", {
-	// 			'body': 'Hi, get ready to grab your dessert at 2pm in the kitchen',
-	// 			'icon': 'http://placekitten.com/g/50/50'
-	// 		});
-	// 	})
-	// }
-	
 	useEffect(() => {
 		switch (day) {
 			case 1:
@@ -46,9 +37,16 @@ function Meals(props) {
 				return null;
 		}
 
+		setLoading(true);
+
 		async function loadMeals() {
-			const response = await api.get('/list');
-			setDays(response.data);
+			const data = await firebase
+			.firestore()
+			.collection('current_week')
+			.get()
+
+			setDays(data.docs.map(doc => doc.data()));
+			setLoading(false);
 		}
 
 		loadMeals();
@@ -62,44 +60,49 @@ function Meals(props) {
 					<li
 						key={i}
 						onClick={e => setActive(i)}
-						className={classNames('', i === activeIndex ? "active" : "", list.week_day === weekDay ? "current_day": "", i+1 < day ? "past_day" : "")}>
-						{list.week_day}
+						className={classNames('', i === activeIndex ? "active" : "", list.day === weekDay ? "current_day": "", i+1 < day ? "past_day" : "")}>
+						{list.day}
 					</li>
 				))}
 			</ul>
 
-			{days.map((day, i) => (
-				<div key={day._id} className={classNames('day', listDays[activeIndex] === day.week_day ? "active" : "", day.holiday === true ? 'holiday' : "", {"dessert": day.meals.dessert === true})}>
-					{/* Meat Lovers */}
-					<div className={classNames("meat_lovers", {'none': day.holiday === true})}>
-						<h4>Meat lovers</h4>
-						<p>{day.meals.meat_lovers.m_ingredients}</p>
-					</div>
+			{loading ? 
+				<div className="lds-ripple"><div></div><div></div></div> : 
+				<>
+					{days.map((menu, i) => (
+						<div key={i} className={classNames('day', listDays[activeIndex] === menu.day ? "active" : "", menu.holiday === true ? 'holiday' : "", {"dessert": menu.dessert === true})}>
+							{/* Meat Lovers */}
+							<div className={classNames("meat_lovers", {'none': menu.holiday === true})}>
+								<h4>Meat lovers</h4>
+								<p>{menu.regular}</p>
+							</div>
 
-					{/* Vegetarian */}
-					<div className={classNames("vegetarian", {'none': day.holiday === true})}>
-						<h4>Vegetarian</h4>
-						<p>{day.meals.vegetarian.v_ingredients}</p>
-					</div>
+							{/* Vegetarian */}
+							<div className={classNames("vegetarian", {'none': menu.holiday === true})}>
+								<h4>Vegetarian</h4>
+								<p>{menu.vegetarian}</p>
+							</div>
 
-					{/* Salad */}
-					<div className={classNames("salad", {'none': day.holiday === true})}>
-						<h4>Salad</h4>
-						<p>{day.meals.salad}</p>
-					</div>
+							{/* Salad */}
+							<div className={classNames("salad", {'none': menu.holiday === true})}>
+								<h4>Salad</h4>
+								<p>{menu.salad}</p>
+							</div>
 
-					{/* Dessert */}
-					<div className={classNames("dessert", {"show": day.meals.dessert === true && listDays[activeIndex] === day.week_day})}>
-						<h4>Dessert</h4>
-						<p>Don't miss out at 2pm in the kitchen</p>
-					</div>
+							{/* Dessert */}
+							<div className={classNames("dessert", {"show": menu.dessert === true && listDays[activeIndex] === menu.day})}>
+								<h4>Dessert</h4>
+								<p>Don't miss out at 2pm in the kitchen</p>
+							</div>
 
-					{/* Public Holiday */}
-					<div className={classNames("holiday", {'show': day.holiday === true && listDays[activeIndex] === day.week_day})}>
-						<h4>No work today!</h4>
-					</div>
-				</div>
-			))}
+							{/* Public Holiday */}
+							<div className={classNames("holiday", {'show': menu.holiday === true && listDays[activeIndex] === menu.day})}>
+								<h4>No work today!</h4>
+							</div>
+						</div>
+					))}
+				</>
+			}
 		</div>
 	)
 }

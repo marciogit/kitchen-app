@@ -5,7 +5,7 @@
 	"main": "electron/main.js",
 	"homepage": "./",
 	"build": {
-	"appId": "com.sooonism.pipidance",
+		"appId": "com.sooonism.pipidance",
 		"mac": {
 			"target": "dmg",
 			"icon": "icon/icon-cupcake.icns"
@@ -20,6 +20,8 @@
 		"electron-installer-dmg": "^3.0.0",
 		"electron-is-dev": "^1.1.0",
 		"electron-packager": "^14.2.0",
+		"firebase": "^7.10.0",
+		"firestore": "^1.1.6",
 		"menubar": "^7.2.0",
 		"node-sass-chokidar": "^1.4.0",
 		"npm-run-all": "^4.1.5",
